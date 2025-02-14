@@ -1,0 +1,55 @@
+data_ingestion:
+  data_path: "C:\\Users\\speed\\OneDrive\\Documents\\BITS_Pilani_Mtech\\Sem2\\DMML\\Assignment\\Assignment_1\\data\\input\\BankChurners.csv"
+  raw_data_path: "C:\\Users\\speed\\OneDrive\\Documents\\BITS_Pilani_Mtech\\Sem2\\DMML\\Assignment\\Assignment_1\\data\\intermediate\\raw_data.csv"
+  preproc_data_path: "C:\\Users\\speed\\OneDrive\\Documents\\BITS_Pilani_Mtech\\Sem2\\DMML\\Assignment\\Assignment_1\\data\\intermediate\\preproc_data.csv"
+  train_data_path: "C:\\Users\\speed\\OneDrive\\Documents\\BITS_Pilani_Mtech\\Sem2\\DMML\\Assignment\\Assignment_1\\data\\intermediate\\train.csv"
+  test_data_path: "C:\\Users\\speed\\OneDrive\\Documents\\BITS_Pilani_Mtech\\Sem2\\DMML\\Assignment\\Assignment_1\\data\\intermediate\\test.csv"
+
+preprocessing:
+  paths:
+    train_preprocessed_path: "C:\\Users\\speed\\OneDrive\\Documents\\BITS_Pilani_Mtech\\Sem2\\DMML\\Assignment\\Assignment_1\\data\\feature_eng\\train_feature_eng.csv"
+    test_preprocessed_path: "C:\\Users\\speed\\OneDrive\\Documents\\BITS_Pilani_Mtech\\Sem2\\DMML\\Assignment\\Assignment_1\\data\\feature_eng\\test_feature_eng.csv"
+
+  one_hot_encoding:
+    columns:
+      - "gender"
+  
+  ordinal_encoding:
+    columns:
+      education_level: 
+       - "Uneducated"
+       - "High School"
+       - "College"
+       - "Graduate"
+       - "Post-Graduate"
+       - "Doctorate"
+       - "Unknown"
+      
+      income_category: 
+        - "Less than $40K"
+        - "$40K - $60K"
+        - "$60K - $80K"
+        - "$80K - $120K"
+        - "$120K +"
+        - "Unknown"
+      
+      card_category: 
+        - "Blue"
+        - "Silver"
+        - "Gold"
+        - "Platinum"
+  
+  target_encoding:
+    columns:
+      - "marital_status"
+    
+  to_drop:
+    columns:
+      - "naive_bayes_classifier_attrition_flag_card_category_contacts_count_12_mon_dependent_count_education_level_months_inactive_12_mon_1"
+      - "naive_bayes_classifier_attrition_flag_card_category_contacts_count_12_mon_dependent_count_education_level_months_inactive_12_mon_2"
+      - "clientnum"
+      - "avg_open_to_buy"
+
+model:
+  save_path: "C:\\Users\\speed\\OneDrive\\Documents\\BITS_Pilani_Mtech\\Sem2\\DMML\\Assignment\\Assignment_1\\model\\train_model.pk"
+  
