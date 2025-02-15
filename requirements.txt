@@ -1,0 +1,9 @@
+apache-airflow
+pandas
+numpy
+matplotlib
+seaborn
+optuna
+PyYAML
+lightgbm
+scikit-learn
