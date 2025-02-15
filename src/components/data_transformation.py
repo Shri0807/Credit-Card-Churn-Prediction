@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.pipeline import Pipeline
-from utils.utils import FeatureEngineer, OneHotFeatureEncoder, OrdinalFeatureEncoder, TargetFeatureEncoder, RecursiveFeatureEliminator, ColumnDropper
+from src.utils.utils import FeatureEngineer, OneHotFeatureEncoder, OrdinalFeatureEncoder, TargetFeatureEncoder, RecursiveFeatureEliminator, ColumnDropper
 from lightgbm import LGBMClassifier
 
 class DataTransformation():
