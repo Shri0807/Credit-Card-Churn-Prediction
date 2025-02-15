@@ -1,7 +1,7 @@
 import pandas as pd
 from lightgbm import LGBMClassifier
 from sklearn.metrics import classification_report, roc_auc_score
-from utils.utils import save_object
+from src.utils.utils import save_object
 
 class ModelTrainer:
     def __init__(self, config):
