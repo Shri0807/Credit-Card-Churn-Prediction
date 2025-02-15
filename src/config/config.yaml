@@ -7,8 +7,8 @@ data_ingestion:
 
 preprocessing:
   paths:
-    train_preprocessed_path: "C:\\Users\\speed\\OneDrive\\Documents\\BITS_Pilani_Mtech\\Sem2\\DMML\\Assignment\\Assignment_1\\data\\feature_eng\\train_feature_eng.csv"
-    test_preprocessed_path: "C:\\Users\\speed\\OneDrive\\Documents\\BITS_Pilani_Mtech\\Sem2\\DMML\\Assignment\\Assignment_1\\data\\feature_eng\\test_feature_eng.csv"
+    train_preprocessed_path: "/opt/airflow/data/feature_eng/train_feature_eng.csv"
+    test_preprocessed_path: "/opt/airflow/data/feature_eng/test_feature_eng.csv"
 
   one_hot_encoding:
     columns:
@@ -52,4 +52,16 @@ preprocessing:
 
 model:
   save_path: "/opt/airflow/model/train_model.pk"
+  best_params:
+    objective: "binary"
+    metric: "roc_auc"
+    n_estimators: 1000
+    verbosity: -1
+    bagging_freq: 1
+    class_weight: "balanced" 
+    learning_rate: 0.017535345166904838
+    num_leaves: 942
+    subsample: 0.8490611533540497
+    colsample_bytree: 0.3775159533799494
+    min_data_in_leaf: 90
   
