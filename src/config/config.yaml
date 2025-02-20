@@ -9,6 +9,7 @@ preprocessing:
   paths:
     train_preprocessed_path: "/opt/airflow/data/feature_eng/train_feature_eng.csv"
     test_preprocessed_path: "/opt/airflow/data/feature_eng/test_feature_eng.csv"
+    preprocessor_path: "/opt/airflow/model/preprocessor.gz"
 
   one_hot_encoding:
     columns:
@@ -51,7 +52,7 @@ preprocessing:
       - "avg_open_to_buy"
 
 model:
-  save_path: "/opt/airflow/model/train_model.pk"
+  save_path: "/opt/airflow/model/train_model.pkl"
   best_params:
     objective: "binary"
     metric: "roc_auc"
