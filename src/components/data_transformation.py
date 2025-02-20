@@ -1,6 +1,7 @@
 import pandas as pd
-from sklearn.pipeline import Pipeline
-from src.utils.utils import FeatureEngineer, OneHotFeatureEncoder, OrdinalFeatureEncoder, TargetFeatureEncoder, RecursiveFeatureEliminator, ColumnDropper
+from sklearn.pipeline import Pipeline 
+from src.utils.modelling_utils import FeatureEngineer, OneHotFeatureEncoder, OrdinalFeatureEncoder, TargetFeatureEncoder, RecursiveFeatureEliminator, ColumnDropper
+from src.utils.utils import save_object
 from lightgbm import LGBMClassifier
 
 class DataTransformation():
@@ -46,6 +47,8 @@ class DataTransformation():
 
         train_preprocessed.to_csv(self.config["preprocessing"]["paths"]["train_preprocessed_path"], index=False, header=True)
         test_preprocessed.to_csv(self.config["preprocessing"]["paths"]["test_preprocessed_path"], index=False, header=True)
+
+        save_object(file_path=self.config["preprocessing"]["paths"]["preprocessor_path"], object=preprocessor)
 
         return train_preprocessed, test_preprocessed
 

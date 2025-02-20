@@ -7,3 +7,4 @@ optuna
 PyYAML
 lightgbm
 scikit-learn
+joblib
