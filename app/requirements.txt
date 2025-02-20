@@ -3,3 +3,7 @@ pandas
 flask
 lightgbm
 scikit-learn
+joblib
+matplotlib
+seaborn
+dill
