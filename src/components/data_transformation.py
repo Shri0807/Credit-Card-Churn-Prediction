@@ -31,8 +31,8 @@ class DataTransformation():
 
     def apply_transformations(self):
 
-        train = pd.read_csv(self.config["data_ingestion"]["train_data_path"])
-        test = pd.read_csv(self.config["data_ingestion"]["test_data_path"])
+        train = pd.read_csv(self.config["data_ingestion"]["csv"]["train_data_path"])
+        test = pd.read_csv(self.config["data_ingestion"]["csv"]["test_data_path"])
 
         X_train, y_train = train.drop(columns=['churn_flag']), train['churn_flag'].copy()
         X_test, y_test = test.drop(columns=['churn_flag']), test['churn_flag'].copy()

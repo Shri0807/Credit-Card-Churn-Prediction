@@ -1,9 +1,17 @@
 data_ingestion:
-  data_path: "/opt/airflow/data/input/BankChurners.csv"
-  raw_data_path: "/opt/airflow/data/intermediate/raw_data.csv"
-  preproc_data_path: "/opt/airflow/data/intermediate/preproc_data.csv"
-  train_data_path: "/opt/airflow/data/intermediate/train.csv"
-  test_data_path: "/opt/airflow/data/intermediate/test.csv"
+  postgres:
+    POSTGRES_USER: "airflow"
+    POSTGRES_PASSWORD: "airflow"
+    POSTGRES_HOST: "postgres"
+    POSTGRES_PORT: "5432"
+    POSTGRES_DB: "airflow"
+    POSTGRES_TABLE_NAME: "bank_churners"
+  csv:
+    data_path: "/opt/airflow/data/input/BankChurners_csv.csv"
+    raw_data_path: "/opt/airflow/data/intermediate/raw_data.csv"
+    preproc_data_path: "/opt/airflow/data/intermediate/preproc_data.csv"
+    train_data_path: "/opt/airflow/data/intermediate/train.csv"
+    test_data_path: "/opt/airflow/data/intermediate/test.csv"
 
 preprocessing:
   paths:
