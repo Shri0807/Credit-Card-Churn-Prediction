@@ -40,6 +40,11 @@ services:
       - POSTGRES_USER=airflow
       - POSTGRES_PASSWORD=airflow
       - POSTGRES_DB=airflow
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres:/docker-entrypoint-initdb.d
+    command: ["bash", "-c", "docker-entrypoint.sh postgres & sleep 10 && bash /docker-entrypoint-initdb.d/import.sh && wait"]
     logging:
       options:
         max-size: 10m
