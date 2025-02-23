@@ -15,7 +15,7 @@ class ModelTrainer:
     Arguments:
         config (dict): Configuration dictionary containing model and preprocessing settings.
     """
-    def __init__(self, config):
+    def __init__(self, config, logger):
         """
         Initializes the ModelTrainer class with the provided configuration.
 
@@ -23,6 +23,7 @@ class ModelTrainer:
             config (dict): Configuration dictionary with paths and model parameters.
         """
         self.config = config
+        self.logger = logger
 
     def train_model(self):
         """
@@ -38,6 +39,7 @@ class ModelTrainer:
             tuple: Classification report (str) and AUC score (float).
         """
         try:
+            self.logger.warning("Model Trainer: train_model: Start")
             train_preprocessed = pd.read_csv(self.config["preprocessing"]["paths"]["train_preprocessed_path"])
             test_preprocessed = pd.read_csv(self.config["preprocessing"]["paths"]["test_preprocessed_path"])
 
@@ -58,6 +60,9 @@ class ModelTrainer:
             class_report = classification_report(y_test, y_pred)
             auc_score = roc_auc_score(y_test, churn_probas)
 
+            self.logger.warning("Model Trainer: train_model: End")
+
             return class_report, auc_score
         except Exception as e:
             raise CustomException(e, sys)
+        

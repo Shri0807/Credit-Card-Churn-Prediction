@@ -17,7 +17,7 @@ class DataTransformation():
     Arguments:
         config (dict): Configuration dictionary read from the pipeline.
     """
-    def __init__(self, config):
+    def __init__(self, config, logger):
         """
         Initializes the DataTransformation class with the provided configuration.
 
@@ -25,6 +25,7 @@ class DataTransformation():
             config (dict): Configuration dictionary containing preprocessing settings.
         """
         self.config = config
+        self.logger = logger
 
     def get_preprocessor(self):
         """
@@ -42,6 +43,7 @@ class DataTransformation():
             Pipeline: A scikit-learn pipeline for preprocessing.
         """
         try:
+            self.logger.warning("Data Tranformation: Preprocessing: Start")
             one_hot_encoding_features = self.config["preprocessing"]["one_hot_encoding"]["columns"]
             ordinal_encoding_orders = self.config["preprocessing"]["ordinal_encoding"]["columns"]
             target_encoding_features = self.config["preprocessing"]["target_encoding"]["columns"]
@@ -59,10 +61,12 @@ class DataTransformation():
                                                                     estimator=LGBMClassifier()))
                     ]
                 )
+            
+            self.logger.warning("Data Tranformation: Preprocessing: End")
+
+            return preprocessor
         except Exception as e:
             raise CustomException(e, sys)
-        
-        return preprocessor
 
     def apply_transformations(self):
         """
@@ -77,6 +81,7 @@ class DataTransformation():
             tuple: Preprocessed training and testing datasets.
         """
         try:
+            self.logger.warning("Data Tranformation: Apply Tranformations: Start")
             train = pd.read_csv(self.config["data_ingestion"]["csv"]["train_data_path"])
             test = pd.read_csv(self.config["data_ingestion"]["csv"]["test_data_path"])
 
@@ -95,6 +100,8 @@ class DataTransformation():
             test_preprocessed.to_csv(self.config["preprocessing"]["paths"]["test_preprocessed_path"], index=False, header=True)
 
             save_object(file_path=self.config["preprocessing"]["paths"]["preprocessor_path"], object=preprocessor)
+
+            self.logger.warning("Data Tranformation: Apply Tranformations: End")
 
             return train_preprocessed, test_preprocessed
         except Exception as e:

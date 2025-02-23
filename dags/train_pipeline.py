@@ -27,11 +27,13 @@ def ingest_data(config):
     ingestion.prepare_data()
 
 def transform_data(config):
-    transformer = DataTransformation(config)
+    logger = Logger("data_transformation").get_logger()
+    transformer = DataTransformation(config, logger)
     transformer.apply_transformations()
 
 def train_model(config):
-    trainer = ModelTrainer(config)
+    logger = Logger("train_model").get_logger()
+    trainer = ModelTrainer(config, logger)
     report, auc = trainer.train_model()
     print(f"Model Training Report:\n{report}\nAUC Score: {auc}")
 
