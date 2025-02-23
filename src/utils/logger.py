@@ -7,7 +7,7 @@ import os
 LOG_FILE = f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
 
 ## The path to the directory where log files are stored.
-logs_path = os.path.abspath(os.path.join(os.getcwd(), '..', '..', 'logs', LOG_FILE))
+logs_path = os.path.abspath(os.path.join(os.getcwd(), 'logs', LOG_FILE))
 
 ## Create the directory if it doesn't exist.
 os.makedirs(logs_path, exist_ok=True)
