@@ -12,6 +12,8 @@ sys.path.append(os.path.abspath(os.path.join(os.getcwd())))
 from src.components.data_ingestion import DataIngestion
 from src.components.data_transformation import DataTransformation
 from src.components.model_trainer import ModelTrainer
+from src.utils.logger import Logger
+
 
 # Function to read config
 def read_config():
@@ -20,8 +22,8 @@ def read_config():
         return yaml.safe_load(file)
 
 def ingest_data(config):
-    print("Data Ingestion")
-    ingestion = DataIngestion(config)
+    logger = Logger("data_ingestion").get_logger()
+    ingestion = DataIngestion(config, logger)
     ingestion.prepare_data()
 
 def transform_data(config):
