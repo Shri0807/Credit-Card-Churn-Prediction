@@ -1,25 +1,40 @@
 import logging
+import os
 from datetime import datetime
 
-import os
+class Logger:
+    """
+    Logger class to handle logging for different stages of the pipeline.
 
-## The filename for the log file, including the current date and time.
-LOG_FILE = f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
+    Logs are saved in the `logs` directory with filenames based on the stage name.
+    """
 
-## The path to the directory where log files are stored.
-logs_path = os.path.abspath(os.path.join(os.getcwd(), 'logs', LOG_FILE))
+    def __init__(self, stage_name):
+        """
+        Initialize the logger with a specific stage name.
 
-## Create the directory if it doesn't exist.
-os.makedirs(logs_path, exist_ok=True)
+        Arguments:
+            stage_name (str): The stage name for logging (e.g., "data_ingestion").
+        """
+        log_dir = "/opt/airflow/logs"
+        os.makedirs(log_dir, exist_ok=True)
 
+        log_filename = os.path.join(log_dir, f"{stage_name}_{datetime.now().strftime('%Y-%m-%d')}.log")
 
-## The full path to the log file.
-LOG_FILE_PATH=os.path.join(logs_path,LOG_FILE)
+        logging.basicConfig(
+            filename=log_filename,
+            level=logging.WARN,
+            format="%(asctime)s - %(levelname)s - %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S"
+        )
 
+        self.logger = logging.getLogger("airflow.task")
 
-## Configure the logging settings.
-logging.basicConfig(
-    filename=LOG_FILE_PATH,
-    format="[ %(asctime)s ] %(lineno)d %(name)s - %(levelname)s - %(message)s",
-    level=logging.INFO,
-)
+    def get_logger(self):
+        """
+        Returns the logger instance.
+
+        Returns:
+            logging.Logger: Configured logger for the given stage.
+        """
+        return self.logger
