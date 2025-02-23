@@ -6,8 +6,8 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sqlalchemy import create_engine
-from utils.exception import CustomException
-from utils.logger import logging
+from src.utils.exception import CustomException
+from src.utils.logger import logging
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 
