@@ -1,0 +1,24 @@
+Column Name,Fill Rate (%),Sparsity (%),Most Frequent Values,Mean,Median,Mode
+clientnum,100.0,0.0,"{768805383: 1, 711784908: 1}",739177606.3336625,717926358.0,768805383
+customer_age,100.0,0.0,"{44: 500, 49: 495}",46.32596030413745,46.0,44
+dependent_count,100.0,0.0,"{3: 2732, 2: 2655}",2.3462032191172115,2.0,3
+months_on_book,100.0,0.0,"{36: 2463, 37: 358}",35.928409203120374,36.0,36
+total_relationship_count,100.0,0.0,"{3: 2305, 4: 1912}",3.8125802310654686,4.0,3
+months_inactive_12_mon,100.0,0.0,"{3: 3846, 2: 3282}",2.3411671768539546,2.0,3
+contacts_count_12_mon,100.0,0.0,"{3: 3380, 2: 3227}",2.4553174681544387,2.0,3
+credit_limit,100.0,0.0,"{34516.0: 508, 1438.3: 507}",8631.953698034955,4549.0,34516.0
+total_revolving_bal,100.0,0.0,"{0: 2470, 2517: 508}",1162.8140614199665,1276.0,0
+avg_open_to_buy,100.0,0.0,"{1438.3: 324, 34516.0: 98}",7469.139636614989,3474.0,1438.3
+total_amt_chng_q4_q1,100.0,0.0,"{0.791: 36, 0.712: 34}",0.7599406536980349,0.736,0.791
+total_trans_amt,100.0,0.0,"{4253: 11, 4509: 11}",4404.086303939963,3899.0,4253
+total_trans_ct,100.0,0.0,"{81: 208, 71: 203}",64.85869457884863,67.0,81
+total_ct_chng_q4_q1,100.0,0.0,"{0.667: 171, 1.0: 166}",0.7122223758269972,0.702,0.667
+avg_utilization_ratio,100.0,0.0,"{0.0: 2470, 0.073: 44}",0.2748935518909845,0.176,0.0
+naive_bayes_classifier_attrition_flag_card_category_contacts_count_12_mon_dependent_count_education_level_months_inactive_12_mon_1,100.0,0.0,"{0.00019864: 80, 0.0003139: 78}",0.15999746437444456,0.00018146,0.00019864
+naive_bayes_classifier_attrition_flag_card_category_contacts_count_12_mon_dependent_count_education_level_months_inactive_12_mon_2,100.0,0.0,"{0.99989: 631, 0.99994: 551}",0.8400025708403278,0.99982,0.99989
+churn_flag,100.0,0.0,"{0: 8500, 1: 1627}",0.1606596227905599,0.0,0
+gender,100.0,0.0,"{'F': 5358, 'M': 4769}",,,F
+education_level,100.0,0.0,"{'Graduate': 3128, 'High School': 2013}",,,Graduate
+marital_status,100.0,0.0,"{'Married': 4687, 'Single': 3943}",,,Married
+income_category,100.0,0.0,"{'Less than $40K': 3561, '$40K - $60K': 1790}",,,Less than $40K
+card_category,100.0,0.0,"{'Blue': 9436, 'Silver': 555}",,,Blue
