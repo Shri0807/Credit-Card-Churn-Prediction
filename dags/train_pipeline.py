@@ -1,5 +1,5 @@
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.operators.python import PythonOperator, BranchPythonOperator
 from datetime import datetime
 import yaml
 
@@ -12,6 +12,7 @@ sys.path.append(os.path.abspath(os.path.join(os.getcwd())))
 from src.components.data_ingestion import DataIngestion
 from src.components.data_transformation import DataTransformation
 from src.components.model_trainer import ModelTrainer
+from src.components.data_validation import DataValidator
 
 # Function to read config
 def read_config():
@@ -23,6 +24,16 @@ def ingest_data(config):
     print("Data Ingestion")
     ingestion = DataIngestion(config)
     ingestion.prepare_data()
+
+def validate_data(config):
+    print("Data Validation")
+    validation = DataValidator(config)
+    output = validation.run_validation()
+
+    if output == True:
+        return "data_transformation"
+    else:
+        return "stop_pipeline"
 
 def transform_data(config):
     transformer = DataTransformation(config)
@@ -60,6 +71,12 @@ task_ingest = PythonOperator(
     dag=dag,
 )
 
+task_validation = BranchPythonOperator(
+    task_id='data_validation',
+    python_callable=lambda **kwargs: validate_data(kwargs['ti'].xcom_pull(task_ids='read_config')),
+    dag=dag
+)
+
 task_transform = PythonOperator(
     task_id='data_transformation',
     python_callable=lambda **kwargs: transform_data(kwargs['ti'].xcom_pull(task_ids='read_config')),
@@ -72,4 +89,13 @@ task_train = PythonOperator(
     dag=dag,
 )
 
-task_read_config >> task_ingest >> task_transform >> task_train
+task_stop = PythonOperator(
+    task_id="stop_pipeline",
+    python_callable=lambda: print("Validation failed. Stopping pipeline."),
+    dag=dag
+)
+
+# DAG flow
+task_read_config >> task_ingest >> task_validation
+task_validation >> task_transform >> task_train
+task_validation >> task_stop
