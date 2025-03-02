@@ -14,38 +14,54 @@ from src.components.data_transformation import DataTransformation
 from src.components.model_trainer import ModelTrainer
 from src.components.data_validation import DataValidator
 from src.utils.logger import Logger
+from src.utils.exception import CustomException
 
 # Function to read config
 def read_config():
-    print("Reading Config")
-    with open('/opt/airflow/src/config/config.yaml', 'r') as file:
-        return yaml.safe_load(file)
+    try:
+        print("Reading Config")
+        with open('/opt/airflow/src/config/config.yaml', 'r') as file:
+            return yaml.safe_load(file)
+    except Exception as e:
+        raise CustomException(e, sys)
 
 def ingest_data(config):
-    logger = Logger("data_ingestion").get_logger()
-    ingestion = DataIngestion(config, logger)
-    ingestion.prepare_data()
+    try:
+        logger = Logger("data_ingestion").get_logger()
+        ingestion = DataIngestion(config, logger)
+        ingestion.prepare_data()
+    except Exception as e:
+        raise CustomException(e, sys)
 
 def validate_data(config):
-    print("Data Validation")
-    validation = DataValidator(config)
-    output = validation.run_validation()
+    try:
+        print("Data Validation")
+        validation = DataValidator(config)
+        output = validation.run_validation()
 
-    if output == True:
-        return "data_transformation"
-    else:
-        return "stop_pipeline"
+        if output == True:
+            return "data_transformation"
+        else:
+            return "stop_pipeline"
+    except Exception as e:
+        raise CustomException(e, sys)
 
 def transform_data(config):
-    logger = Logger("data_transformation").get_logger()
-    transformer = DataTransformation(config, logger)
-    transformer.apply_transformations()
+    try:
+        logger = Logger("data_transformation").get_logger()
+        transformer = DataTransformation(config, logger)
+        transformer.apply_transformations()
+    except Exception as e:
+        raise CustomException(e, sys)
 
 def train_model(config):
-    logger = Logger("train_model").get_logger()
-    trainer = ModelTrainer(config, logger)
-    report, auc = trainer.train_model()
-    print(f"Model Training Report:\n{report}\nAUC Score: {auc}")
+    try:
+        logger = Logger("train_model").get_logger()
+        trainer = ModelTrainer(config, logger)
+        report, auc = trainer.train_model()
+        print(f"Model Training Report:\n{report}\nAUC Score: {auc}")
+    except Exception as e:
+        raise CustomException(e, sys)
 
 # Define DAG
 default_args = {
