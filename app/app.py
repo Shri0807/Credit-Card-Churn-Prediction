@@ -47,7 +47,7 @@ def predict_data():
             input_df = input_data.get_input_data()
             print(input_df)
 
-            with open("/home/model/train_model.pkl", 'rb') as file_object:
+            with open("/home/model/predict_model.pkl", 'rb') as file_object:
                 model = pickle.load(file_object)
             
             preprocessor = joblib.load('/home/model/preprocessor.gz')
