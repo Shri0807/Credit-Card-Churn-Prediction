@@ -13,6 +13,7 @@ from src.components.data_ingestion import DataIngestion
 from src.components.data_transformation import DataTransformation
 from src.components.model_trainer import ModelTrainer
 from src.components.data_validation import DataValidator
+from src.utils.logger import Logger
 
 # Function to read config
 def read_config():
@@ -21,8 +22,8 @@ def read_config():
         return yaml.safe_load(file)
 
 def ingest_data(config):
-    print("Data Ingestion")
-    ingestion = DataIngestion(config)
+    logger = Logger("data_ingestion").get_logger()
+    ingestion = DataIngestion(config, logger)
     ingestion.prepare_data()
 
 def validate_data(config):
@@ -36,11 +37,13 @@ def validate_data(config):
         return "stop_pipeline"
 
 def transform_data(config):
-    transformer = DataTransformation(config)
+    logger = Logger("data_transformation").get_logger()
+    transformer = DataTransformation(config, logger)
     transformer.apply_transformations()
 
 def train_model(config):
-    trainer = ModelTrainer(config)
+    logger = Logger("train_model").get_logger()
+    trainer = ModelTrainer(config, logger)
     report, auc = trainer.train_model()
     print(f"Model Training Report:\n{report}\nAUC Score: {auc}")
 
