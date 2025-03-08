@@ -133,4 +133,24 @@ The **LightGBM model** demonstrated excellent performance, effectively identifyi
 
 | Model    | Accuracy | Precision | Recall   | F1-Score | ROC-AUC  | KS       | Gini     | PR-AUC   | Brier    |
 |----------|----------|-----------|----------|----------|----------|----------|----------|----------|----------|
-| LightGBM | 0.965943 | 0.895062  | 0.892308 | 0.893683 | 0.991279 | 0.898897 | 0.982559 | 0.964932 | 0.025852 |
+| LightGBM | 0.965449 | 0.915309  | 0.864615 | 0.889241 | 0.989830 | 0.890217 | 0.979661 | 0.960793 | 0.028718 |
+
+# 6. How to Run the Code Using Docker
+
+To run the project using Docker, follow these steps:
+
+1. Ensure you have **Docker** and **Docker Compose** installed on your system.
+2. Navigate to the project directory where the `docker-compose.yml` file is located.
+3. Run the following command:
+   ```sh
+   docker compose up --build -d
+   ```
+4. This command will build the required Docker images and start the services in detached mode.
+5. To check the running containers, use:
+  ```sh
+  docker ps
+  ```
+6. To stop the containers, run:
+  ```sh
+  docker compose down
+  ```
