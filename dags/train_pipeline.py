@@ -67,7 +67,7 @@ def train_model(config):
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2025, 2, 14),
+    'start_date': datetime(2025, 3, 7),
     'retries': 1,
 }
 
@@ -76,6 +76,7 @@ dag = DAG(
     default_args=default_args,
     description='An ML pipeline with data ingestion, transformation, and model training',
     schedule_interval='@daily',
+    catchup=False
 )
 
 task_read_config = PythonOperator(
